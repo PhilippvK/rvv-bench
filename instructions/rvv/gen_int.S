@@ -249,64 +249,6 @@ define(`m_bench_all',`
 	m_bench_xv($1, T_W, vwmaccsu)
 	m_mask($1, bench_vwmaccusvx,  T_W, m_nop, vwmaccus.vx,  v8, t0, v16)
 
-#if __riscv_f
-	m_bench_vf($1, T_F, vfadd)
-	m_bench_vf($1, T_F, vfsub)
-	m_bench_vf($1, T_F, vfmin)
-	m_bench_vf($1, T_F, vfmax)
-	m_bench_vf($1, T_F, vfsgnj)
-	m_bench_vf($1, T_F, vfsgnjn)
-	m_bench_vf($1, T_F, vfsgnjx)
-	m_mask($1, bench_vfslide1upvf,   T_F, m_nop, vfslide1up.vf,   v8, v16, ft0)
-	m_mask($1, bench_vfslide1downvf, T_F, m_nop, vfslide1down.vf, v8, v16, ft0)
-
-	m_mask($1, bench_vfredusumvs, T_F, m_nop, vfredusum.vs, v8, v16, v24)
-	m_mask($1, bench_vfredosumvs, T_F, m_nop, vfredosum.vs, v8, v16, v24)
-	m_mask($1, bench_vfredminvs,  T_F, m_nop, vfredmin.vs,  v8, v16, v24)
-	m_mask($1, bench_vfredmaxvs,  T_F, m_nop, vfredmax.vs,  v8, v16, v24)
-
-	m_$1(bench_vfmergevfm, T_F, m_nop, vfmerge.vfm, v8,  v16, ft0, v0)
-	m_$1(bench_vfmvvf,     T_F, m_nop, vfmv.v.f,    v8,  ft0)
-
-	m_bench_vf($1, T_F, vmfeq)
-	m_bench_vf($1, T_F, vmfle)
-	m_bench_vf($1, T_F, vmflt)
-	m_bench_vf($1, T_F, vmfne)
-	m_bench_vf($1, T_F, vmfgt)
-	m_bench_vf($1, T_F, vmfge)
-
-	m_bench_vf($1, T_F, vfdiv)
-	m_mask($1, bench_vfrdivvf, T_F, m_nop, vfrdiv.vf, v8, v16, ft0)
-	m_bench_vf($1, T_F, vfmul)
-	m_mask($1, bench_vfrsubvf, T_F, m_nop, vfrsub.vf, v8, v16, ft0)
-	m_bench_fv($1, T_F, vfmadd)
-	m_bench_fv($1, T_F, vfmsub)
-	m_bench_fv($1, T_F, vfmacc)
-	m_bench_fv($1, T_F, vfmsac)
-#endif
-
-
-	m_bench_fv($1, T_FN, vfnmsac)
-	m_bench_fv($1, T_FN, vfnmacc)
-	m_bench_fv($1, T_FN, vfnmsub)
-	m_bench_fv($1, T_FN, vfnmadd)
-
-	m_mask($1, bench_vwredsumuvs, T_WR, m_nop, vwredsumu.vs, v8, v16, v24)
-	m_mask($1, bench_vwredsumvs,  T_WR, m_nop, vwredsum.vs,  v8, v16, v24)
-
-	m_bench_vf($1, T_FW, vfwadd)
-	m_bench_vf($1, T_FW, vfwsub)
-	m_bench_wf($1, T_FW, vfwadd)
-	m_bench_wf($1, T_FW, vfwsub)
-	m_bench_vf($1, T_FW, vfwmul)
-	m_bench_fv($1, T_FW, vfwmacc)
-	m_bench_fv($1, T_FW, vfwnmacc)
-	m_bench_fv($1, T_FW, vfwmsac)
-	m_bench_fv($1, T_FW, vfwnmsac)
-
-	m_mask($1, bench_vfwredosumvs, T_FWR, m_nop, vfwredosum.vs, v8, v16, v24)
-	m_mask($1, bench_vfwredusumvs, T_FWR, m_nop, vfwredusum.vs, v8, v16, v24)
-
 	m_$1(bench_vmvsx, T_A, m_nop, vmv.s.x, v8, t0)
 	m_$1(bench_vmvxs, T_A, m_nop, vmv.x.s, t0, v8)
 
@@ -318,38 +260,6 @@ define(`m_bench_all',`
 	m_mask($1, bench_vsextvf4, T_E4, m_1bit, vsext.vf4, v8, v16)
 	m_mask($1, bench_vzextvf8, T_E8, m_1bit, vzext.vf8, v8, v16)
 	m_mask($1, bench_vsextvf8, T_E8, m_1bit, vsext.vf8, v8, v16)
-
-	m_$1(bench_vfmvfs, T_F, m_nop, vfmv.f.s, ft0, v8)
-	m_$1(bench_vfmvsf, T_F, m_nop, vfmv.s.f, v8,  ft0)
-
-	m_mask($1, bench_vfcvtxufv,    T_F, m_nop, vfcvt.xu.f.v,     v8, v16)
-	m_mask($1, bench_vfcvtxfv,     T_F, m_nop, vfcvt.x.f.v,      v8, v16)
-	m_mask($1, bench_vfcvtfxuv,    T_F, m_nop, vfcvt.f.xu.v,     v8, v16)
-	m_mask($1, bench_vfcvtfxv,     T_F, m_nop, vfcvt.f.x.v,      v8, v16)
-	m_mask($1, bench_vfcvtrtzxfv,  T_F, m_nop, vfcvt.rtz.x.f.v,  v8, v16)
-	m_mask($1, bench_vfcvtrtzxufv, T_F, m_nop, vfcvt.rtz.xu.f.v, v8, v16)
-
-	m_mask($1, bench_vfwcvtxufv,    T_FW, m_nop, vfwcvt.xu.f.v,     v8, v16)
-	m_mask($1, bench_vfwcvtxfv,     T_FW, m_nop, vfwcvt.x.f.v,      v8, v16)
-	m_mask($1, bench_vfwcvtfxuv,    T_FW, m_nop, vfwcvt.f.xu.v,     v8, v16)
-	m_mask($1, bench_vfwcvtfxv,     T_FW, m_nop, vfwcvt.f.x.v,      v8, v16)
-	m_mask($1, bench_vfwcvtffv,     T_FW, m_nop, vfwcvt.f.f.v,      v8, v16)
-	m_mask($1, bench_vfwcvtrtzxufv, T_FW, m_nop, vfwcvt.rtz.xu.f.v, v8, v16)
-	m_mask($1, bench_vfwcvtrtzxfv,  T_FW, m_nop, vfwcvt.rtz.x.f.v,  v8, v16)
-
-	m_mask($1, bench_vfncvtxufw,       T_FN, m_nop, vfncvt.xu.f.w,     v8, v16)
-	m_mask($1, bench_vfncvtxfw,        T_FN, m_nop, vfncvt.x.f.w,      v8, v16)
-	m_mask($1, bench_vfncvtfxuw,       T_FN, m_nop, vfncvt.f.xu.w,     v8, v16)
-	m_mask($1, bench_vfncvtfxw,        T_FN, m_nop, vfncvt.f.x.w,      v8, v16)
-	m_mask($1, bench_vfncvtffw,        T_FN, m_nop, vfncvt.f.f.w,      v8, v16)
-	m_mask($1, bench_vfncvtrtzxfw,     T_FN, m_nop, vfncvt.rtz.x.f.w,  v8, v16)
-	m_mask($1, bench_vfncvtrtzxufw,    T_FN, m_nop, vfncvt.rtz.xu.f.w, v8, v16)
-	m_mask($1, bench_vfncvt.rod.f.f.w, T_FN, m_nop, vfncvt.rod.f.f.w,  v8, v16)
-
-	m_mask($1, bench_vfsqrtv,   T_F, m_nop, vfsqrt.v,   v8, v16)
-	m_mask($1, bench_vfrsqrt7v, T_F, m_nop, vfrsqrt7.v, v8, v16)
-	m_mask($1, bench_vfrec7v,   T_F, m_nop, vfrec7.v,   v8, v16)
-	m_mask($1, bench_vfclassv,  T_F, m_nop, vfclass.v,  v8, v16)
 
 	m_mask($1, bench_vmsbfm,   T_A, m_1bit, vmsbf.m,   v8, v16)
 	m_mask($1, bench_vmsofm,   T_A, m_1bit, vmsof.m,   v8, v16)
@@ -633,7 +543,7 @@ randomize:
 		mulhu a7, a0, a5
 		xor \x, a6, a7
 		and a5, \x, a4 # zero upper f16/f32/f64 exponent bit
-		fmv.w.x f\()\x, a5
+		// fmv.w.x f\()\x, a5
 		.ifnb
 			randomize_reg \xs
 		.endif
